@@ -4,7 +4,7 @@
  * Description:       Método de pago offline para WooCommerce que muestra un QR del Ligo y el nombre del titular.
  * Author: Renzo Tejada
  * Author URI: https://renzotejada.com/
- * Version:           1.2
+ * Version:           1.3
  * Requires at least: 6.8
  * Requires PHP:      7.4
  * License: GPLv2 or later

@@ -3,7 +3,7 @@ Contributors: Renzo Tejada
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.2
+Stable tag: 1.3
 WC requires at least: 6.8
 WC tested up to: 9.9
 License: GPLv2 or later
@@ -27,6 +27,8 @@ Método de pago offline para WooCommerce que muestra un QR del Ligo y el nombre 
 3. Guarda los cambios.
 
 == Changelog ==
+= 1.3 =
+* Add deploy with git actions.
 = 1.2 =
 * Corrigiendo lo solicitado por el equipo de Soporte de Automatic.
 = 1.1 =
