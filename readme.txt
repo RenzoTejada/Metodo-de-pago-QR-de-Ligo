@@ -1,9 +1,9 @@
 === Método de pago QR de Ligo ===
-Contributors: renzotejada, axatejada, huakotech
+Contributors: renzotejada, huakotech, alexistejada
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.4
+Stable tag: 1.5
 WC requires at least: 6.8
 WC tested up to: 9.9
 License: GPLv2 or later
@@ -27,6 +27,8 @@ Método de pago offline para WooCommerce que muestra un QR del Ligo y el nombre 
 3. Guarda los cambios.
 
 == Changelog ==
+= 1.5 =
+* Agregando colaboradores y assets de banner plugin
 = 1.4 =
 * Agregando colaboradores
 = 1.3 =
