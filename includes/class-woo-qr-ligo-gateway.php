@@ -128,30 +128,56 @@ class QR_LIGO_Gateway extends WC_Payment_Gateway {
     public function thankyou_page( $order_id ) {
         if ( ! $this->enable_thankyou ) { return; }
         $order = wc_get_order( $order_id );
-        if ( ! $order ) { return; }
+        if ( ! $order || $order->get_payment_method() !== $this->id ) { return; }
 
         $merchant = $order->get_meta( '_ligo_qr_merchant_name', true );
         $qr_url   = $order->get_meta( '_ligo_qr_image_url', true );
-
         if ( empty( $merchant ) ) { $merchant = $this->merchant_name; }
-        if ( empty( $qr_url ) )   { $qr_url   = $this->qr_image_url; }
-
-        echo '<section class="qrligo-thankyou" style="margin:1.25rem 0;padding:1rem;border:1px solid #e5e7eb;border-radius:10px;background:#f8fafc;">';
-        echo '<h2 style="margin:0 0 .75rem 0;">' . esc_html__( 'Pago por QR Ligo', 'metodo-de-pago-qr-de-ligo' ) . '</h2>';
-
-        if ( $merchant ) {
-            echo '<p style="margin:.25rem 0;"><strong>' . esc_html__( 'titular:', 'metodo-de-pago-qr-de-ligo' ) . '</strong> ' . esc_html( $merchant ) . '</p>';
-        }
-
-        if ( $qr_url ) {
-            echo '<div style="margin-top:.5rem;"><img src="' . esc_url( $qr_url ) . '" alt="' . esc_attr__( 'QR Ligo', 'metodo-de-pago-qr-de-ligo' ) . '" style="max-width:260px;height:auto;border-radius:6px;"/></div>';
-        }
-
-        if ( $this->instructions ) {
-            echo '<p style="margin-top:.75rem;">' . wp_kses_post( wpautop( $this->instructions ) ) . '</p>';
-        }
-
-        echo '</section>';
+        if ( empty( $qr_url ) )   { $qr_url = $this->qr_image_url; }
+        $has_qr = ! empty( $qr_url ) && wp_http_validate_url( $qr_url );
+        ?>
+        <section class="qrligo-thankyou" aria-label="<?php echo esc_attr__( 'Instrucciones para pagar con QR Ligo', 'metodo-de-pago-qr-de-ligo' ); ?>">
+            <div class="qrligo-thankyou__header">
+                <div class="qrligo-thankyou__topbar">
+                    <span class="qrligo-thankyou__eyebrow"><?php esc_html_e( 'Método de pago seleccionado', 'metodo-de-pago-qr-de-ligo' ); ?></span>
+                    <div class="qrligo-thankyou__brand" aria-label="Ligo">
+                        <img src="<?php echo esc_url( QRLIGO_URL . 'assets/img/logo-ligo.png' ); ?>" alt="" width="20" height="20" loading="eager" />
+                        <span><?php esc_html_e( 'Ligo', 'metodo-de-pago-qr-de-ligo' ); ?></span>
+                    </div>
+                </div>
+                <h2><?php esc_html_e( 'Paga tu pedido con QR Ligo', 'metodo-de-pago-qr-de-ligo' ); ?></h2>
+                <p><?php esc_html_e( 'Escanea el código y realiza el pago desde tu aplicación compatible.', 'metodo-de-pago-qr-de-ligo' ); ?></p>
+            </div>
+            <div class="qrligo-thankyou__content">
+                <div class="qrligo-thankyou__qr-area">
+                    <?php if ( $has_qr ) : ?>
+                        <div class="qrligo-thankyou__qr-frame">
+                            <img src="<?php echo esc_url( $qr_url ); ?>" alt="<?php echo esc_attr__( 'Código QR para pagar con Ligo', 'metodo-de-pago-qr-de-ligo' ); ?>" loading="eager" decoding="async" />
+                        </div>
+                    <?php else : ?>
+                        <p class="qrligo-thankyou__missing"><?php esc_html_e( 'El comercio aún no ha configurado una imagen QR. Contáctalo para coordinar tu pago.', 'metodo-de-pago-qr-de-ligo' ); ?></p>
+                    <?php endif; ?>
+                    <?php if ( $merchant ) : ?>
+                        <p class="qrligo-thankyou__merchant"><?php esc_html_e( 'Titular:', 'metodo-de-pago-qr-de-ligo' ); ?> <strong><?php echo esc_html( $merchant ); ?></strong></p>
+                    <?php endif; ?>
+                </div>
+                <div class="qrligo-thankyou__details">
+                    <p class="qrligo-thankyou__amount-label"><?php esc_html_e( 'Importe de tu pedido', 'metodo-de-pago-qr-de-ligo' ); ?></p>
+                    <div class="qrligo-thankyou__amount"><?php echo wp_kses_post( $order->get_formatted_order_total() ); ?></div>
+                    <p class="qrligo-thankyou__order"><?php echo esc_html( sprintf( __( 'Pedido #%s', 'metodo-de-pago-qr-de-ligo' ), $order->get_order_number() ) ); ?></p>
+                    <ol class="qrligo-thankyou__steps">
+                        <li><?php esc_html_e( 'Abre Ligo o una aplicación compatible.', 'metodo-de-pago-qr-de-ligo' ); ?></li>
+                        <li><?php esc_html_e( 'Escanea el QR y verifica el titular y el importe.', 'metodo-de-pago-qr-de-ligo' ); ?></li>
+                        <li><?php esc_html_e( 'Realiza el pago e indica tu número de pedido como referencia.', 'metodo-de-pago-qr-de-ligo' ); ?></li>
+                    </ol>
+                    <?php if ( $this->instructions ) : ?>
+                        <div class="qrligo-thankyou__instructions"><?php echo wp_kses_post( wpautop( $this->instructions ) ); ?></div>
+                    <?php endif; ?>
+                    <p class="qrligo-thankyou__note"><?php esc_html_e( 'Tu pedido permanecerá en espera hasta que el comercio confirme el pago.', 'metodo-de-pago-qr-de-ligo' ); ?></p>
+                </div>
+            </div>
+        </section>
+        <?php
     }
 
     public function email_instructions( $order, $sent_to_admin, $plain_text, $email ) {

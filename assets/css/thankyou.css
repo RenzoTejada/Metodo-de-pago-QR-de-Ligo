@@ -1,0 +1,30 @@
+/* Styles scoped exclusively to the QR Ligo thank-you block. */
+.qrligo-thankyou{box-sizing:border-box;max-width:920px;margin:28px auto 36px;border:1px solid #e5def3;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 12px 32px rgba(62,25,116,.08);color:#241a34;font-family:inherit}
+.qrligo-thankyou *{box-sizing:border-box}
+.qrligo-thankyou__header{padding:24px 28px;background:linear-gradient(112deg,#54239c,#8124d6);color:#fff}
+.qrligo-thankyou__eyebrow{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.86;margin:0}
+.qrligo-thankyou .qrligo-thankyou__header h2{margin:0 0 5px;font-size:clamp(22px,2.5vw,29px);line-height:1.25;color:#fff;font-weight:750}
+.qrligo-thankyou__header p{margin:0;color:#f4eafd;font-size:14px;line-height:1.6}
+.qrligo-thankyou__content{display:grid;grid-template-columns:minmax(210px,.85fr) minmax(0,1.3fr);gap:30px;padding:28px;align-items:start}
+.qrligo-thankyou__qr-area{text-align:center;padding:18px;border-radius:14px;background:#faf7fe;border:1px solid #eee5fa}
+.qrligo-thankyou__qr-frame{display:inline-flex;justify-content:center;align-items:center;background:#fff;border:1px solid #eae5f3;border-radius:12px;padding:13px;max-width:100%;box-shadow:0 3px 12px rgba(45,23,80,.06)}
+.qrligo-thankyou__qr-frame img{display:block;width:min(100%,220px);height:auto;max-width:220px;aspect-ratio:1;object-fit:contain;border-radius:3px}
+.qrligo-thankyou__merchant{margin:12px 0 0;font-size:13px;overflow-wrap:anywhere;color:#51445f}
+.qrligo-thankyou__amount-label{font-size:13px;color:#665978;margin:0 0 4px}
+.qrligo-thankyou__amount{font-size:clamp(26px,3vw,34px);font-weight:800;color:#4b168f;line-height:1.2}
+.qrligo-thankyou__order{font-size:13px;margin:7px 0 18px;color:#675b77}
+.qrligo-thankyou__steps{margin:0 0 16px!important;padding-left:25px!important;list-style:decimal!important;color:#33283f;font-size:14px;line-height:1.65}
+.qrligo-thankyou__steps li{padding:0 0 8px 3px;margin:0!important}
+.qrligo-thankyou__steps li::marker{color:#6928b6;font-weight:750}
+.qrligo-thankyou__instructions{border-left:3px solid #9d6fe0;background:#f8f5fd;padding:12px 15px;border-radius:0 9px 9px 0;font-size:13px;line-height:1.6}
+.qrligo-thankyou__instructions p{margin:0 0 7px}
+.qrligo-thankyou__instructions p:last-child{margin-bottom:0}
+.qrligo-thankyou__note{margin:16px 0 0!important;padding:12px;border-radius:9px;background:#fff8e9;border:1px solid #f1e2bb;font-size:13px;line-height:1.5;color:#5e4b29}
+.qrligo-thankyou__missing{font-size:13px;line-height:1.6;color:#695777;margin:0}
+@media(max-width:660px){.qrligo-thankyou{margin:20px 0;border-radius:14px}.qrligo-thankyou__header{padding:20px}.qrligo-thankyou__content{grid-template-columns:1fr;padding:18px;gap:20px}.qrligo-thankyou__qr-area{padding:16px}.qrligo-thankyou__qr-frame img{width:200px;max-width:100%}}
+
+/* Ligo identity in the order-confirmation header. Scoped to this gateway only. */
+.qrligo-thankyou__topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.qrligo-thankyou__brand{display:inline-flex;align-items:center;gap:7px;padding:4px 10px;border:1px solid rgba(255,255,255,.24);border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font-size:13px;font-weight:700;letter-spacing:.01em;line-height:1;white-space:nowrap;flex-shrink:0}
+.qrligo-thankyou__brand img{width:20px;height:20px;border-radius:6px;object-fit:contain;background:#fff;padding:2px;display:block}
+@media(max-width:660px){.qrligo-thankyou__topbar{align-items:flex-start;flex-direction:column;gap:8px}.qrligo-thankyou__brand{font-size:12px;padding:4px 8px}.qrligo-thankyou__brand img{width:18px;height:18px}}
